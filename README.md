@@ -193,7 +193,7 @@ on_xxx函数需要返回一个WxResponse的子类实例。WxResponse的子类及
 	from flask import Flask
 	app = Flask(__name__)
 	
-	@app.route('/wechat')
+	@app.route('/wechat', methods=['GET', 'POST'])
 	def wechat():
 		app = WxApp()
 		return app.process(request.args, request.data)

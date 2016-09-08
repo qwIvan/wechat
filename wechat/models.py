@@ -7,6 +7,12 @@ import time
 
 def kv2element(key, value, doc):
     ele = doc.createElement(key)
+
+    try:  # python3 compatible
+        unicode
+    except:
+        unicode = str
+
     if isinstance(value, str) or isinstance(value, unicode):
         data = doc.createCDATASection(value)
         ele.appendChild(data)
@@ -47,7 +53,10 @@ class WxRequest(object):
 class WxResponse(object):
 
     def __init__(self, request):
-        self.CreateTime = long(time.time())
+        try:
+            self.CreateTime = long(time.time())
+        except:
+            self.CreateTime = int(time.time())
         self.ToUserName = request.FromUserName
         self.FromUserName = request.ToUserName
         self.Extra = {}

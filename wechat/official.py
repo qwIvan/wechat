@@ -36,7 +36,7 @@ class WxApplication(object):
 
         sign_ele = [self.token, timestamp, nonce]
         sign_ele.sort()
-        if(signature == sha1(''.join(sign_ele)).hexdigest()):
+        if(signature == sha1(''.join(sign_ele).encode('utf-8')).hexdigest()):
             return True, echostr
         else:
             return None
